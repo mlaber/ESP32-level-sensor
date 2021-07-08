@@ -37,7 +37,7 @@ Passt die Einträge wie:
 * Hostname - unter diesem Namen könnt ihr über mdns im format HOSTNAME.local auf den Webserver zugrefen
 * min_level, max_level untere bzw. obere Füllstandgrenze der Zisterne in cm 
 
-im header der der ![main.cpp](/main/src/main.cpp) an und kompiliert den sketch mit arduino oder platformio. Nachdem ersten kompilieren wird der enstandene Binärcode via USB auf den ESP Microcontroller übertragen. Der Code ist OTA fähig, so dass zukünftige Updates - ohne USB-Kabel over-the-air übertragen werden können.
+im header der der ![main.cpp](/src/main.cpp) an und kompiliert den sketch mit arduino oder platformio. Nachdem ersten kompilieren wird der enstandene Binärcode via USB auf den ESP Microcontroller übertragen. Der Code ist OTA fähig, so dass zukünftige Updates - ohne USB-Kabel over-the-air übertragen werden können.
 
 ## Datacollection
 
@@ -46,10 +46,9 @@ Das verwendete ![prrometheus exporter format](/images/screenshot-prometheus.png)
 
 Wenn ihr bereits einen prometheus server am laufen habt könnt ihr eure *prometheus.yml* wie folgt erweitern und die Metriken langzeit archivieren. Der name des targets muss dem von euch in der main.cpp konfigurierten hostname entsprechen.
 
- `- job_name: 'Zisterne'
-    #honor_labels: true
-    static_configs:
-      - targets: ['zisterne01.fritz.box:9110']`
+ > - job_name: 'Zisterne'
+ >   static_configs:
+ >     - targets: ['zisterne01.fritz.box:9110']`
       
      
   ## Visualisierung
