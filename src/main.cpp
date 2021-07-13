@@ -3,7 +3,7 @@
 //*********************************************************************************************************
 //
 // first release on 05/2021
-// Version 0019 , July.08 2021
+// Version 0020 , July.13 2021
 //
 
 
@@ -61,7 +61,7 @@ float min_level = 173.0;                       // distance to level of fluid in 
 float max_level = 28.0;                      // distance level of fluid in the reservoir in cm, the level where the fluid is drained by the overflow 
 // End of parameters //
 
-float version = 0.19;
+float version = 0.20;
 float level_percentage = 0.0;
 float cmDistance;     // Distance from the sensor to the surface of the fluid
 float cmHeight;       // Height of the fluid in reservoir
