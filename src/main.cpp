@@ -57,8 +57,8 @@ int port = 9110;                              // TCP port for prometheus exporte
 int ota_port = 3232;                          // TCP port for OTA Updates
 int samplerate = 10;                          // 1..10 Samples that ave to been taken to calculate a average metric
 int watchdog_timeout = 90;                    // Seconds before a blocking task leads to a watchdog reset
-float min_level = 138.0;                       // distance to level of fluid in the reservoir in cm, the level where the pump dry-run protection shuts down the pump
-float max_level = 24.0;                      // distance level of fluid in the reservoir in cm, the level where the fluid is drained by the overflow 
+float min_level = 173.0;                       // distance to level of fluid in the reservoir in cm, the level where the pump dry-run protection shuts down the pump
+float max_level = 28.0;                      // distance level of fluid in the reservoir in cm, the level where the fluid is drained by the overflow 
 // End of parameters //
 
 float version = 0.19;
