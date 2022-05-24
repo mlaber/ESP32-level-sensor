@@ -3,7 +3,7 @@
 //*********************************************************************************************************
 //
 // first release on 05/2021
-// Version 0020 , July.13 2021
+// Version 0021 , May 19 2022
 //
 
 
@@ -50,8 +50,8 @@ int VCCsensor = 32;
 
 
 // Enter your parameters here: //
-const char* ssid = "Your-WiFi-SSID";                // WLAN SSID
-const char* password = "Your-WiFi-password";                    // WLAN password
+const char* ssid = "YOUR_SSID";                // WLAN SSID
+const char* password = "YOUR_PASSWORD";                    // WLAN password
 const char* hostname ="zisterne01";            // DNS hostname of the ESP also used as prefix for prometheus metric name
 int port = 9110;                              // TCP port for prometheus exporter webserver see https://github.com/prometheus/prometheus/wiki/Default-port-allocations for default ports.
 int ota_port = 3232;                          // TCP port for OTA Updates
@@ -61,7 +61,7 @@ float min_level = 173.0;                       // distance to level of fluid in 
 float max_level = 28.0;                      // distance level of fluid in the reservoir in cm, the level where the fluid is drained by the overflow 
 // End of parameters //
 
-float version = 0.20;
+float version = 0.21;
 float level_percentage = 0.0;
 float cmDistance;     // Distance from the sensor to the surface of the fluid
 float cmHeight;       // Height of the fluid in reservoir
@@ -69,6 +69,8 @@ float distance;
 float vcc = 0.0;            // calcutlated supply voltage from ESP ADC.
 unsigned long duration;
 unsigned long avg_duration;
+unsigned long previous_time = 0;
+unsigned long wifi_connection_delay = 20000;  // wait 20 seconds for wifi connection
 long rssi;           // WiFi RSSI signal strength
 float uptime;        // Controller Uptime
 
@@ -266,9 +268,20 @@ void setup() {
 //**************************************************************************************************
   
 void loop(){
+  unsigned long current_time = millis(); // number of milliseconds since the upload
   ArduinoOTA.handle();     // Handler for Over The Air firmware updates
   esp_task_wdt_reset();     // Reset the task watchdog because we are still runnning ...
   server.handleClient();
+
+   // checking for WIFI connection
+  if ((WiFi.status() != WL_CONNECTED) && (current_time - previous_time >=wifi_connection_delay)) {
+    Serial.print(millis());
+    Serial.println("Reconnecting to WIFI network");
+    WiFi.disconnect();
+    WiFi.reconnect();
+    previous_time = current_time;
+  }
+
 }
 
 void handleRoot();
